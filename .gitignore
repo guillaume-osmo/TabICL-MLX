@@ -1,0 +1,29 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+*.npz
+*.ckpt
+.env
+.venv/
+*.so
+.DS_Store
+
+# Local weight / cache dirs — never push, even if someone removes the *.npz rule
+tabpfn_mlx_cache/
+sticl_weights/
+distill_cache/
+
+# Agent / IDE state
+.claude/
+
+# Ad-hoc scratch
+error
+distill_stpfn.py
+distill_streaming.py
+distill_streaming_v0.py
+distill_sticl_v0.py

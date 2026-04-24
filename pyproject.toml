@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "tabicl-mlx"
+version = "0.1.0"
+description = "Apple Silicon native inference for TabICL using MLX"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Guillaume" },
+]
+keywords = ["mlx", "tabular", "in-context-learning", "apple-silicon", "tabicl"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "mlx>=0.20.0",
+    "numpy",
+    "scikit-learn",
+]
+
+[project.optional-dependencies]
+convert = [
+    "torch",
+    "huggingface-hub",
+]
+full = [
+    "tabicl",
+]
+# mlx-addons brings the GPU-accelerated decompositions / kernels
+# (EnsembleRandomProjection, PCA, csr_matmul, Nystroem, KernelPCA, KMeans)
+# used by the MoleculeACE benchmarks in this repo.
+mlx-addons = [
+    "mlx-addons @ git+https://github.com/guillaume-osmo/mlx-addons@main",
+]
+# ChemeleonSMD: MLX molecular-fingerprint model (ScoreDMPNN distilled).
+# Required by all benchmark_moleculeace*.py scripts.
+chemeleon = [
+    "chemeleon-smd @ git+https://github.com/guillaume-osmo/ChemeleonSMD@main",
+]
+# One-shot install for the MoleculeACE benchmark experience.
+moleculeace = [
+    "tabicl-mlx[mlx-addons,chemeleon]",
+]
+
+[project.urls]
+Homepage = "https://github.com/guillaume-osmo/TabICL-MLX"
+Repository = "https://github.com/guillaume-osmo/TabICL-MLX"
+
+[tool.setuptools.packages.find]
+include = ["tabicl_mlx*", "tabpfn_mlx*"]
